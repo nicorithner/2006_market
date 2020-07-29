@@ -6,7 +6,6 @@ class Vendor
   end
   def add_item(item, quantity)
     @inventory[item] = quantity
-# {:quantity => quantity}
   end
 
   def stock(item, quantity)
@@ -15,12 +14,19 @@ class Vendor
     else
       @inventory[item] += quantity
     end
-# binding.pry
+
   end
 
   def check_stock(item)
     @inventory[item]
-# [:quantity]
+  end
+
+  def potential_revenue
+     
+    total = @inventory.map do |item, quantity|
+      item.price.slice(1..4).to_f * quantity
+    end
+    total.sum
   end
 
 end
