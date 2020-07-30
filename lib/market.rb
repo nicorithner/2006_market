@@ -19,4 +19,15 @@ class Market
     end
   end
 
+  def sorted_item_list
+    list = @vendors.flat_map do |vendor|
+      vendor.inventory.keys.find_all do |item|
+        vendor.check_stock(item)
+      end
+    end.uniq
+    list.map do |item|
+      item.name
+    end.sort
+  end
+
 end
