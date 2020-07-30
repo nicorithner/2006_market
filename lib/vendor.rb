@@ -22,9 +22,8 @@ class Vendor
   end
 
   def potential_revenue
-     
     total = @inventory.map do |item, quantity|
-      item.price.slice(1..4).to_f * quantity
+      item.price * quantity
     end
     total.sum
   end
