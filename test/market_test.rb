@@ -149,7 +149,6 @@ class MarketTest < Minitest::Test
   end
 
   def test_it_can_do_total_inventory
-skip
     market = Market.new("South Pearl Street Farmers Market")   
 
     item1 = Item.new({name: "Peach", price: "$0.75"})
@@ -176,25 +175,9 @@ skip
     market.add_vendor(vendor2)    
     market.add_vendor(vendor3)    
     
-    expected = {
-        item1 => {
-          quantity: 100,
-          vendors: [vendor1, vendor2]
-        },
-        item2 => {
-          quantity: 7,
-          vendors: [vendor1]
-        },
-        item3 => {
-          quantity: 50,
-          vendors: [vendor2, vendor3]
-        },
-        item4=> {
-          quantity: 35,
-          vendors: [vendor2]
-        },
-      }
-    assert_equal expected, market.total_inventory
+    assert_equal 100 , market.total_inventory[item1][:quantity]
+    assert_equal [vendor1, vendor3] , market.total_inventory[item1][:vendors]
+    assert_equal 4 , market.total_inventory.count
   end
 
 end
